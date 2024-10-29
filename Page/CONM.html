@@ -1,0 +1,1926 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Website</title>
+    <link rel="stylesheet" href="../CSS/CONM.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="nav" id="nav">
+        <img src="../Images/1000031782-removebg-preview.png" />
+        <a href="../index.html">Home</a>
+        <a href="CONM.html">Practise</a>
+        <a href="../index.html#About">About</a>
+        <a href="#Contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="Sidebar">
+        <span>Data Representation</span>
+        <a href="#dectobin">Decimal to Binary</a>
+        <a href="#bintodec">Binary to Decimal</a>
+        <a href="#floattobin">Float to Binary</a>
+        <a href="#bintofloat">Binary to Float</a>
+        <hr/>
+        
+        <span>Solution of Non-Linear Equations</span>
+        <a href="#Bisection">Bisection Method</a>
+        <a href="#Regular-Falsi">Regular-Falsi Method</a>
+        <a href="#Newton-Raphson">Newton Rapson Method</a>
+        <a href="#Secant">Secant Method</a>
+        <a href="#Birge-Vieta">Birge-Vieta Method</a>
+        <hr/>
+        
+        <span>Solution of Linear &nbsp;Equations</span>
+        <a href="#GElim">Gauss Elimination</a>
+        <a href="#GJord">Gauss jordan Method</a>
+        <a href="#GJaco">Gauss Jacobi Method</a>
+        <a href="#GSeid">Gauss Seidal Method</a>
+        <hr/>
+        
+        <span>Interpolation</span>
+        <a href="#LagI">Lagrange Interpolation</a>
+        <a href="#InvI">Inverse Interpolation</a>
+        <a href="#NewDiv">Newton's Divided Differ</a>
+        <a href="#NewFor">Newton's Forward Differ</a>
+        <a href="#NewBac">Newton's Backward Diff</a>
+        <hr/>
+
+        <span>Numerical Integration</span>
+        <a href="#Trap">Trapezoidal Rule</a>
+        <a href="#Simp1/3">Simpson's 1/3 Rule</a>
+        <a href="#Simp3/8">Simpson's 3/8 Rule</a>
+        <hr/>
+
+        <span>Numerical Solution of Differential Equations</span>
+        <a href="#Rung2">Runge-Kutta 2nd Order</a>
+        <a href="#Rung4">Runge-Kutta 4th Order</a>
+        <a href="#Eul">Euler's Method</a>
+        <a href="#ModEul">Modified Euler's Method</a>
+        <hr/>
+
+      </section>
+
+      <section class="Content">
+        <div id="dectobin" class="Content-box">
+          <h2>Decimal to Binary</h2>
+          <div class="code-box">
+            <div class="code">
+              <h3>Code :</h3>
+              <pre>
+#include &lt;stdio.h>
+
+int main()
+{
+    int num = 0, n;
+    long long int p = 1, bnum = 0;
+    printf("Enter the number : ");
+    scanf("%d", &num);
+    if (num >= 0)
+    {
+        n = num;
+        while (n)
+        {
+            bnum += ((n % 2) * p);
+            p = p * 10;
+            n = n / 2;
+        }
+        printf("Binary Number of %d is %lld\n", num, bnum);
+    }
+    else
+        printf("Please Enter Positive number!\n");
+
+    return 0;
+}
+        </pre
+              >
+            </div>
+            <div class="output">
+              <h3>Output :</h3>
+              <pre>
+Enter the number : 27
+Binary Number of 27 is 11011
+                                        </pre
+              >
+            </div>
+          </div>
+        </div>
+
+        <div id="bintodec" class="Content-box">
+          <h2>Binary to Decimal</h2>
+          <div class="code-box">
+            <div class="code">
+              <h3>Code :</h3>
+              <pre>
+#include &lt;stdio.h>
+
+int main()
+{
+    int num = 0, p = 1;
+    long long int bn, bnum = 0;
+    printf("Enter the Binary number : ");
+    scanf("%lld", &bnum);
+    if (bnum >= 0)
+    {
+        bn = bnum;
+        while (bn)
+        {
+            if ((bn % 10) == 1 || (bn % 10) == 0)
+            {
+                num += ((bn % 10) * p);
+                p = p * 2;
+                bn = bn / 10;
+            }
+            else
+            {
+                printf("Wrong Binary Number!");
+                return 0;
+            }
+        }
+        printf("Decimal Number of %lld is %d\n", bnum, num);
+    }
+    else
+        printf("Please Enter Correct Binary number!\n");
+
+    return 0;
+}
+        </pre
+              >
+            </div>
+            <div class="output">
+              <h3>Output :</h3>
+              <pre>
+Enter the Binary number : 1100
+Decimal Number of 1100 is 12
+                                        </pre
+              >
+            </div>
+          </div>
+        </div>
+
+        <div id="floattobin" class="Content-box">
+          <h2>Float to Binary</h2>
+          <div class="code-box">
+            <div class="code">
+              <h3>Code :</h3>
+              <pre>
+#include &lt;iostream>
+#include &lt;iomanip>
+using namespace std;
+
+int main()
+{
+    float num;
+    int n, b = 0, d;
+    char bd[5];
+
+    cout << "Enter the floating number : ";
+    cin >> num;
+
+    n = num;
+    d = (num - n) * 100; 
+
+    int p = 1;
+    while (n != 0)
+    {
+        b = b + (n % 2) * p;
+        p = p * 10;
+        n = n / 2;
+    }
+
+    for (int i = 0; i < 4; i++)
+    {
+        d = d * 2;
+        if (d / 100 > 0)
+            bd[i] = '1';
+        else
+            bd[i] = '0';
+        d = d % 100;
+    }
+    bd[4] = '\0';
+
+    cout << "Binary number : " << b << "." << bd << endl;
+
+    return 0;
+}&lt;
+        </pre
+              >
+            </div>
+            <div class="output">
+              <h3>Output :</h3>
+              <pre>
+Enter the floating number : 12.125
+Binary number : 1100.0001
+                                        </pre
+              >
+            </div>
+          </div>
+        </div>
+
+        <div id="bintofloat" class="Content-box">
+          <h2>Binary to Float</h2>
+          <div class="code-box">
+            <div class="code">
+              <h3>Code :</h3>
+              <pre>
+#include &lt;stdio.h>
+#include &lt;math.h>
+
+float binaryToFloat(const char* binary) {
+    float result = 0.0;
+    int integerPart = 1;
+    float fractionalValue = 0.5;
+
+    while (*binary) {
+        if (*binary == '.') {
+            integerPart = 0;
+        } else {
+            if (integerPart) {
+                result = result * 2 + (*binary - '0');
+            } else {
+                result += (*binary - '0') * fractionalValue;
+                fractionalValue /= 2;
+            }
+        }
+        binary++;
+    }
+
+    return result;
+}
+
+int main() {
+    char binary[50];
+
+    printf("Enter the binary number : ");
+    scanf("%s", binary);
+
+    float result = binaryToFloat(binary);
+    printf("The float representation is: %f\n", result);
+
+    return 0;
+}
+
+        </pre
+              >
+            </div>
+            <div class="output">
+              <h3>Output :</h3>
+              <pre>
+Enter the binary number : 101.11
+The float representation is: 5.750000
+                                        </pre
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- <div id="negto1s" class="Content-box">
+          <h2>Binary number to 1s Compliment</h2>
+          <div class="code-box">
+            <div class="code">
+              <h3>Code :</h3>
+              <pre>
+#include &lt;stdio.h>
+#include &lt;string.h>
+
+int main()
+{
+    char bin[8], comb[8];
+    int isNeg = 0, dec = 0, i = 0, len;
+
+    printf("Enter a 8-bit binary number : ");
+    scanf("%s", bin);
+
+    len = strlen(bin);
+    if (bin[0] == '1')
+    {
+        isNeg = 1;
+        for (i = 0; i < len; i++)
+        {
+            if (bin[i] == '1')
+                comb[i] = '0';
+            else
+                comb[i] = '1';
+        }
+        for (i = 0; i < len; i++)
+            dec = dec * 2 + (comb[i] - '0');
+    }
+    else
+        for (i = 0; i < len; i++)
+            dec = dec * 2 + (bin[i] - '0');
+
+    if (isNeg)
+        dec = -dec;
+    printf("Decimal equivalent: %d\n", dec);
+
+    return 0;
+}
+        </pre
+              >
+            </div>
+            <div class="output">
+              <h3>Output :</h3>
+              <pre>
+Enter a 8-bit binary number : 11101011
+Decimal equivalent: -20
+                                        </pre
+              >
+            </div>
+          </div>
+        </div> -->
+
+
+        <!-- <div id="negto1s" class="Content-box">
+          <h2>Negative number to 2s Compliment</h2>
+          <div class="code-box">
+            <div class="code">
+              <h3>Code :</h3>
+              <pre>
+#include <stdio.h>
+
+int main()
+{
+    int num, i = 0, j, is_neg = 0, bin[8] = {0}, two_Com[8] = {0};
+
+    printf("Enter a decimal number (From -128 to 127): ");
+    scanf("%d", &num);
+
+    if (num < 0)
+    {
+        is_neg = 1;
+        num = -num;
+    }
+
+    while (num > 0 && i < 8)
+    {
+        bin[i] = num % 2;
+        num /= 2;
+        i++;
+    }
+
+    while (i < 8)
+        bin[i++] = 0;
+
+    if (is_neg)
+    {
+        for (j = 0; j < 8; j++)
+            two_Com[j] = bin[j] == 0 ? 1 : 0;
+
+        int carry = 1;
+        for (j = 0; j < 8; j++)
+        {
+            int sum = two_Com[j] + carry;
+            two_Com[j] = sum % 2;
+            carry = sum / 2;
+        }
+    }
+    else
+    {
+        for (j = 0; j < 8; j++)
+            two_Com[j] = bin[j];
+    }
+
+    printf("Binary: ");
+    for (j = 7; j >= 0; j--)
+        printf("%d", bin[j]);
+
+    printf("\n2's Complement: ");
+    for (j = 7; j >= 0; j--)
+        printf("%d", two_Com[j]);
+
+    printf("\n");
+    return 0;
+}
+
+        </pre>
+            </div>
+            <div class="output">
+              <h3>Output :</h3>
+              <pre>
+
+                                        </pre
+              >
+            </div>
+          </div>
+        </div>
+        <div id="negto1s" class="Content-box">
+          <h2>Negative number to 1s Compliment</h2>
+          <div class="code-box">
+            <div class="code">
+              <h3>Code :</h3>
+              <pre>
+
+        </pre>
+            </div>
+            <div class="output">
+              <h3>Output :</h3>
+              <pre>
+
+                                        </pre
+              >
+            </div>
+          </div>
+        </div>
+
+
+        <div id="negto1s" class="Content-box">
+          <h2>Negative number to 1s Compliment</h2>
+          <div class="code-box">
+            <div class="code">
+              <h3>Code :</h3>
+              <pre>
+
+        </pre>
+            </div>
+            <div class="output">
+              <h3>Output :</h3>
+              <pre>
+
+                                        </pre
+              >
+            </div>
+          </div>
+        </div> -->
+
+      <section class="Content">
+        <div id="Bisection" class="Content-box">
+          <h2>Bisection Method</h2>
+          <div class="code-box">
+            <div class="code">
+              <h3>Code :</h3>
+              <pre>
+#include &lt;stdio.h>
+#include &lt;math.h>
+#include &lt;conio.h>
+                        
+int expo[10], coeff[10], n;
+
+float fx(float x)
+{
+    float sum = 0;
+    for (int i = 0; i < n; i++)
+    {
+        sum += coeff[i] * pow(x, expo[i]);
+    }
+    return sum;
+}
+
+void Bisection()
+{
+    int i = 0, fa = 0, fb = 0;
+    float a, b, e;
+    for (int i = -3; i < 5; i++)
+    {
+        e = fx(i);
+        if (e < 0)
+        {
+            a = i;
+            fa = 1;
+        }
+
+        if (e > 0)
+        {
+            b = i;
+            fb = 1;
+        }
+
+        if (fa == 1 && fb == 1)
+            break;
+    }
+    a = 1;
+    b = 2;
+    printf("\na : %f and b : %f\n", a, b);
+    float m, me;
+    do
+    {
+        m = (a + b) / 2;
+        me = fx(m);
+        printf("\nIteration %d", ++i);
+        printf("\na : %f and b : %f", a, b);
+        printf("\nx : %f and f(x) : %f\n", m, me);
+        if (me < 0)
+            a = m;
+        else if (me > 0)
+            b = m;
+        else
+            break;
+    } while (me > 0.0002 || me < -0.0002);
+    printf("Real root is %f", m);
+}
+
+void display()
+{
+    printf("\nPolynomial Eq^n : ");
+    for (int i = 0; i < n; i++)
+    {
+        printf("%dx^%d", coeff[i], expo[i]);
+        if (i + 1 != n)
+            printf(" + ");
+    }
+    printf("\n");
+}
+
+int main()
+{
+    int i;
+    printf("Enter the number of term : ");
+    scanf("%d", &n);
+    for (i = 0; i < n; i++)
+    {
+        printf("Enter the %d term : ", i + 1);
+        scanf("%d %d", &coeff[i], &expo[i]);
+    }
+
+    display();
+    Bisection();
+    // printf("\nfx value when x is 1 : %f", fx(1));
+    return 0;
+}
+        </pre
+              >
+            </div>
+            <div class="output">
+              <h3>Output :</h3>
+              <pre>
+Enter the number of term : 3
+Enter the 1 term : 1 4
+Enter the 2 term : -1 1
+Enter the 3 term : -10 0
+
+Polynomial Eq^n : 1x^4 + -1x^1 + -10x^0
+
+a : 1.000000 and b : 2.000000
+
+Iteration 1
+a : 1.000000 and b : 2.000000
+x : 1.500000 and f(x) : -6.437500
+
+Iteration 2
+a : 1.500000 and b : 2.000000
+x : 1.750000 and f(x) : -2.371094
+
+Iteration 3
+a : 1.750000 and b : 2.000000
+x : 1.875000 and f(x) : 0.484619
+
+Iteration 4
+a : 1.750000 and b : 1.875000
+x : 1.812500 and f(x) : -1.020248
+
+Iteration 5
+a : 1.812500 and b : 1.875000
+x : 1.843750 and f(x) : -0.287734
+
+Iteration 6
+a : 1.843750 and b : 1.875000
+x : 1.859375 and f(x) : 0.093378
+
+Iteration 7
+a : 1.843750 and b : 1.859375
+x : 1.851563 and f(x) : -0.098433
+
+Iteration 8
+a : 1.851563 and b : 1.859375
+x : 1.855469 and f(x) : -0.002843
+
+Iteration 9
+a : 1.855469 and b : 1.859375
+x : 1.857422 and f(x) : 0.045189
+
+Iteration 10
+a : 1.855469 and b : 1.857422
+x : 1.856445 and f(x) : 0.021153
+
+Iteration 11
+a : 1.855469 and b : 1.856445
+x : 1.855957 and f(x) : 0.009151
+
+Iteration 12
+a : 1.855469 and b : 1.855957
+x : 1.855713 and f(x) : 0.003153
+
+Iteration 13
+a : 1.855469 and b : 1.855713
+x : 1.855591 and f(x) : 0.000154
+Real root is 1.855591
+                                        </pre
+              >
+            </div>
+          </div>
+        </div>
+
+        <div id="Regular-Falsi" class="Content-box">
+          <h2>Regular-Falsi Method</h2>
+          <div class="code-box">
+            <div class="code">
+              <h3>Code :</h3>
+              <pre>
+#include &lt;stdio.h>
+#include &lt;math.h>
+#include &lt;conio.h>
+
+int expo[10], coeff[10], n;
+
+float fx(float x)
+{
+    float sum = 0;
+    for (int i = 0; i < n; i++)
+    {
+        sum += coeff[i] * pow(x, expo[i]);
+    }
+    return sum;
+}
+
+void RegularFalsi()
+{
+    int i = 0, fla = 0, flb = 0;
+    float a, b, e, fxa, fxb;
+    for (int i = -3; i < 5; i++)
+    {
+        e = fx(i);
+        if (e < 0)
+        {
+            a = i;
+            fxa = e;
+            fla = 1;
+        }
+        else if (e > 0)
+        {
+            b = i;
+            fxb = e;
+            flb = 1;
+        }
+
+        if (fla == 1 && flb == 1)
+            break;
+    }
+    a = 2;
+    fxa = fx(2);
+    b = 2.5;
+    fxb = fx(2.5);
+    printf("\na : %f and b : %f\n", a, b);
+    printf("\nf(a) : %f and f(b) : %f\n", fxa, fxb);
+    float m, me;
+    do
+    {
+        m = ((a * fxb) - (b * fxa)) / (fxb - fxa);
+        me = fx(m);
+        printf("\nIteration %d", ++i);
+        printf("\na : %f and b : %f", a, b);
+        printf("\nx : %f and f(x) : %f\n", m, me);
+        if (me < 0)
+            a = m;
+        else if (me > 0)
+            b = m;
+        else
+            break;
+    } while (me > 0.0002 || me < -0.0002);
+    printf("Real root is %f", m);
+}
+
+void display()
+{
+    printf("\nPolynomial Eq^n : ");
+    for (int i = 0; i < n; i++)
+    {
+        printf("%dx^%d", coeff[i], expo[i]);
+        if (i + 1 != n)
+            printf(" + ");
+    }
+    printf("\n");
+}
+
+int main()
+{
+    int i;
+    printf("Enter the number of term : ");
+    scanf("%d", &n);
+    for (i = 0; i < n; i++)
+    {
+        printf("Enter the %d term : ", i + 1);
+        scanf("%d %d", &coeff[i], &expo[i]);
+    }
+
+    display();
+    RegularFalsi();
+    // printf("\nfx value when x is 1 : %f", fx(1));
+    return 0;
+}
+              </pre>
+            </div>
+            <div class="output">
+              <h3>Output :</h3>
+              <pre>
+Enter the number of term : 3
+Enter the 1 term : 1 3
+Enter the 2 term : -2 1
+Enter the 3 term : -5 0
+
+Polynomial Eq^n : 1x^3 + -2x^1 + -5x^0
+
+a : 2.000000 and b : 2.500000
+
+f(a) : -1.000000 and f(b) : 5.625000
+
+Iteration 1
+a : 2.000000 and b : 2.500000
+x : 2.075472 and f(x) : -0.210678
+
+Iteration 2
+a : 2.075472 and b : 2.500000
+x : 2.139551 and f(x) : 0.515079
+
+Iteration 3
+a : 2.075472 and b : 2.139551
+x : 2.085144 and f(x) : -0.104445
+
+Iteration 4
+a : 2.085144 and b : 2.139551
+x : 2.093356 and f(x) : -0.013330
+
+Iteration 5
+a : 2.093356 and b : 2.139551
+x : 2.100329 and f(x) : 0.064697
+
+Iteration 6
+a : 2.093356 and b : 2.100329
+x : 2.094409 and f(x) : -0.001593
+
+Iteration 7
+a : 2.094409 and b : 2.100329
+x : 2.095302 and f(x) : 0.008384
+
+Iteration 8
+a : 2.094409 and b : 2.095302
+x : 2.094544 and f(x) : -0.000087
+Real root is 2.094544
+              </pre>
+            </div>
+          </div>
+        </div>
+
+        <div id="Newton-Raphson" class="Content-box">
+          <h2>Newton-Raphson Method</h2>
+          <div class="code-box">
+            <div class="code">
+              <h3>Code :</h3>
+              <pre>
+#include &lt;stdio.h>
+#include &lt;math.h>
+#include &lt;conio.h>
+
+int expo[10], coeff[10], n;
+int dexpo[10], dcoeff[10], dn;
+
+float fx(float x)
+{
+    float sum = 0;
+    for (int i = 0; i < n; i++)
+    {
+        sum += coeff[i] * pow(x, expo[i]);
+    }
+    return sum;
+}
+
+float fdx(float x)
+{
+    float sum = 0;
+    for (int i = 0; i < dn; i++)
+    {
+        sum += dcoeff[i] * pow(x, dexpo[i]);
+    }
+    return sum;
+}
+
+void NewtonRaphson()
+{
+    int i = 0, fla = 0, flb = 0;
+    float a, b, x, e, fxa, fxb;
+    for (int i = -3; i < 5; i++)
+    {
+        e = fx(i);
+        if (e < 0)
+        {
+            a = i;
+            fxa = e;
+            fla = 1;
+        }
+        else if (e > 0)
+        {
+            b = i;
+            fxb = e;
+            flb = 1;
+        }
+
+        if (fla == 1 && flb == 1)
+            break;
+    }
+
+    printf("\na : %f and b : %f\n", a, b);
+    printf("\nf(a) : %f and f(b) : %f\n", fxa, fxb);
+
+    x = (a + b) / 2;
+    // x = 2.625;
+    printf("Value of x : %f", x);
+    float m, me;
+    do
+    {
+        m = x - ((fx(x)) / (fdx(x)));
+        me = fx(m);
+        printf("\nIteration %d", ++i);
+        printf("\nx : %f and f(x) : %f\n", m, me);
+        x = m;
+    } while (me > 0.0002 || me < -0.0002);
+    printf("Real root is %f", m);
+}
+
+void display()
+{
+    printf("\nPolynomial Eq^n : ");
+    for (int i = 0; i < n; i++)
+    {
+        printf("%dx^%d", coeff[i], expo[i]);
+        if (i + 1 != n)
+            printf(" + ");
+    }
+    printf("\n");
+}
+
+int main()
+{
+    int i;
+    printf("Enter the number of term : ");
+    scanf("%d", &n);
+    printf("Enter eqn for f(x) \n");
+    for (i = 0; i < n; i++)
+    {
+        printf("Enter the %d term : ", i + 1);
+        scanf("%d %d", &coeff[i], &expo[i]);
+    }
+
+    printf("\nEnter eqn for Derivative of f(x) 
+    which is f'(x) \n");
+    printf("Enter the number of term : ");
+    scanf("%d", &dn);
+    for (i = 0; i < dn; i++)
+    {
+        printf("Enter the %d term : ", i + 1);
+        scanf("%d %d", &dcoeff[i], &dexpo[i]);
+    }
+
+    display();
+    NewtonRaphson();
+    // printf("\nfx value when x is 1 : %f", fx(1));
+    return 0;
+}</pre
+              >
+            </div>
+            <div class="output">
+              <h3>Output :</h3>
+              <pre>
+Enter the number of term : 3
+Enter eqn for f(x) 
+Enter the 1 term : 1 3
+Enter the 2 term : -4 1
+Enter the 3 term : -9 0
+
+Enter eqn for Derivative of f(x) 
+which is f'(x)
+Enter the number of term : 2
+Enter the 1 term : 3 2
+Enter the 2 term : -4 0
+
+Polynomial Eq^n : 1x^3 + -4x^1 + -9x^0
+
+a : 2.000000 and b : 3.000000
+
+f(a) : -9.000000 and f(b) : 6.000000
+Value of x : 2.625000
+Iteration 1
+x : 2.709700 and f(x) : 0.057104
+
+Iteration 2
+x : 2.706532 and f(x) : 0.000082
+Real root is 2.706532</pre
+              >
+            </div>
+          </div>
+        </div>
+
+        <div id="Secant" class="Content-box">
+          <h2>Secant Method</h2>
+          <div class="code-box">
+            <div class="code">
+              <h3>Code :</h3>
+              <pre>
+#include &lt;stdio.h>
+#include &lt;math.h>
+#include &lt;conio.h>
+
+int expo[10], coeff[10], n;
+
+float fx(float x)
+{
+    float sum = 0;
+    for (int i = 0; i < n; i++)
+    {
+        sum += coeff[i] * pow(x, expo[i]);
+    }
+    return sum;
+}
+
+void SecantMethod()
+{
+    int i = 0, fla = 0, flb = 0;
+    float a, b, e, fxa, fxb;
+    for (int i = -3; i < 5; i++)
+    {
+        e = fx(i);
+        if (e < 0)
+        {
+            a = i;
+            fxa = e;
+            fla = 1;
+        }
+        else if (e > 0)
+        {
+            b = i;
+            fxb = e;
+            flb = 1;
+        }
+
+        if (fla == 1 && flb == 1)
+            break;
+    }
+    a = 1.5;
+    fxa = fx(1.5);
+    b = 2;
+    fxb = fx(2);
+    printf("\na : %f and b : %f\n", a, b);
+    printf("\nf(a) : %f and f(b) : %f\n", fxa, fxb);
+    float m, me;
+    do
+    {
+        m = ((a * fxb) - (b * fxa)) / (fxb - fxa);
+        me = fx(m);
+        printf("\nIteration %d", ++i);
+        printf("\na : %f and b : %f", a, b);
+        printf("\nx : %f and f(x) : %f\n", m, me);
+        a = b;
+        fxa = fxb;
+        b = m;
+        fxb = me;
+    } while (me > 0.0002 || me < -0.0002);
+    printf("Real root is %f", m);
+}
+
+void display()
+{
+    printf("\nPolynomial Eq^n : ");
+    for (int i = 0; i < n; i++)
+    {
+        printf("%dx^%d", coeff[i], expo[i]);
+        if (i + 1 != n)
+            printf(" + ");
+    }
+    printf("\n");
+}
+
+int main()
+{
+    int i;
+    printf("Enter the number of term : ");
+    scanf("%d", &n);
+    for (i = 0; i < n; i++)
+    {
+        printf("Enter the %d term : ", i + 1);
+        scanf("%d %d", &coeff[i], &expo[i]);
+    }
+
+    display();
+    SecantMethod();
+    // printf("\nfx value when x is 1 : %f", fx(1));
+    return 0;
+}
+              </pre>
+            </div>
+            <div class="output">
+              <h3>Output :</h3>
+              <pre>
+Enter the number of term : 3
+Enter the 1 term : 1 4
+Enter the 2 term : -1 1
+Enter the 3 term : -10 0
+
+Polynomial Eq^n : 1x^4 + -1x^1 + -10x^0
+
+a : 1.500000 and b : 2.000000
+
+f(a) : -6.437500 and f(b) : 4.000000
+
+Iteration 1
+a : 1.500000 and b : 2.000000
+x : 1.808383 and f(x) : -1.113849
+
+Iteration 2
+a : 2.000000 and b : 1.808383
+x : 1.850119 and f(x) : -0.133591
+
+Iteration 3
+a : 1.808383 and b : 1.850119
+x : 1.855807 and f(x) : 0.005468
+
+Iteration 4
+a : 1.850119 and b : 1.855807
+x : 1.855584 and f(x) : -0.000024
+Real root is 1.855584                        
+              </pre>
+            </div>
+          </div>
+        </div>
+
+        <div id="Birge-Vieta" class="Content-box">
+          <h2>Birge-Vieta Method</h2>
+          <div class="code-box">
+            <div class="code">
+              <h3>Code :</h3>
+              <pre>
+#include &lt;stdio.h>
+#include &lt;math.h>
+#include &lt;conio.h>
+
+int expo[10], coeff[10], n;
+
+float fx(float x)
+{
+    float sum = 0;
+    for (int i = 0; i < n; i++)
+    {
+        sum += coeff[i] * pow(x, expo[i]);
+    }
+    return sum;
+}
+
+void display()
+{
+    printf("\nPolynomial Eq^n : ");
+    for (int i = 0; i < n; i++)
+    {
+        printf("%dx^%d", coeff[i], expo[i]);
+        if (i + 1 != n)
+            printf(" + ");
+    }
+    printf("\n");
+}
+
+int main()
+{
+    int i, a[10] = {0};
+    printf("Enter the number of term : ");
+    scanf("%d", &n);
+    for (i = 0; i < n; i++)
+    {
+        printf("Enter the %d term : ", i + 1);
+        scanf("%d %d", &coeff[i], &expo[i]);
+        a[expo[0] - expo[i]] = coeff[i];
+    }
+    float b[10], c[10], pp, cp;
+    b[0] = c[0] = a[0];
+
+    printf("\nEnter the value of p0 : ");
+    scanf("%f", &pp);
+
+    for (int i = 0; i <= expo[0]; i++)
+        printf("\na %d : %d", i, a[i]);
+
+    for (int i = 1; i <= expo[0]; i++)
+        b[i] = a[i] + b[i - 1] * pp;
+
+    printf("\n");
+    for (int i = 0; i <= expo[0]; i++)
+        printf("b%d : %f -- ", i, b[i]);
+
+    printf("\n");
+    for (int i = 1; i < expo[0]; i++)
+        c[i] = b[i] + c[i - 1] * pp;
+
+    for (int i = 0; i < expo[0]; i++)
+        printf("c%d : %f -- ", i, c[i]);
+
+    cp = pp - b[expo[0]] / c[expo[0] - 1];
+    printf("\n 1 Iteration p1 : %f", cp);
+
+    int k = 2;
+    do
+    {
+        pp = cp;
+        for (int i = 1; i <= expo[0]; i++)
+            b[i] = a[i] + b[i - 1] * pp;
+
+        printf("\n");
+        for (int i = 0; i <= expo[0]; i++)
+            printf("b%d : %f -- ", i, b[i]);
+
+        printf("\n");
+        for (int i = 1; i < expo[0]; i++)
+            c[i] = b[i] + c[i - 1] * pp;
+
+        for (int i = 0; i < expo[0]; i++)
+            printf("c%d : %f -- ", i, c[i]);
+
+        cp = pp - b[expo[0]] / c[expo[0] - 1];
+        printf("\n %d Iteration p%d : %f", k, k++, cp);
+        printf("\n");
+    } while (cp - pp < -0.002 || cp - pp > 0.002);
+
+    return 0;
+}
+              </pre>
+            </div>
+            <div class="output">
+              <h3>Output :</h3>
+              <pre>
+Enter the number of term : 3
+Enter the 1 term : 1 5
+Enter the 2 term : -1 1
+Enter the 3 term : 1 0
+
+Enter the value of p0 : -1.5
+
+a 0 : 1
+a 1 : 0
+a 2 : 0
+a 3 : 0
+a 4 : -1
+a 5 : 1
+b0 : 1.000000 -- b1 : -1.500000 -- b2 : 2.250000 
+-- b3 : -3.375000 -- b4 : 4.062500 -- b5 :
+ -5.093750 --
+c0 : 1.000000 -- c1 : -3.000000 -- c2 : 6.750000 
+-- c3 : -13.500000 -- c4 : 24.312500 --    
+ 1 Iteration p1 : -1.290488
+b0 : 1.000000 -- b1 : -1.290488 -- b2 : 1.665361 
+-- b3 : -2.149129 -- b4 : 1.773426 -- b5 :
+ -1.288586 --
+c0 : 1.000000 -- c1 : -2.580977 -- c2 : 4.996082 
+-- c3 : -8.596515 -- c4 : 12.867129 --     
+ 3 Iteration p2 : -1.190343
+
+b0 : 1.000000 -- b1 : -1.190343 -- b2 : 1.416916 
+-- b3 : -1.686616 -- b4 : 1.007652 -- b5 :
+ -0.199451 --
+c0 : 1.000000 -- c1 : -2.380686 -- c2 : 4.250749 
+-- c3 : -6.746465 -- c4 : 9.038258 --      
+ 4 Iteration p3 : -1.168275
+
+b0 : 1.000000 -- b1 : -1.168275 -- b2 : 1.364868 
+-- b3 : -1.594541 -- b4 : 0.862863 -- b5 :
+ -0.008062 --
+c0 : 1.000000 -- c1 : -2.336551 -- c2 : 4.094603 
+-- c3 : -6.378165 -- c4 : 8.314318 -- 
+ 5 Iteration p4 : -1.167306
+              </pre>
+            </div>
+          </div>
+
+          <div id="GElim" class="Content-box">
+            <h2>Gauss Elimination Method</h2>
+            <div class="code-box">
+              <div class="code">
+                <h3>Code :</h3>
+                <pre>
+#include &lt;stdio.h>
+#include &lt;conio.h>
+
+int a[3][3], c[3];
+
+void GaussElimination()
+{
+    float x, y, z;
+    for (int i = 0; i < 2; i++)
+    {
+        for (int j = i + 1; j < 3; j++)
+        {
+            int fact1 = a[i][i], fact2 = a[j][i];
+            for (int k = 0; k < 3; k++)
+                a[j][k] = fact1 * a[j][k] - fact2 * a[i][k];
+            c[j] = fact1 * c[j] - fact2 * c[i];
+        }
+    }
+    z = (float)c[2] / a[2][2];
+    y = (float)(c[1] - (a[1][2] * z)) / a[1][1];
+    x = (float)(c[0] - (a[0][1] * y) - (a[0][2] * z)) / a[0][0];
+
+    printf("\nSolution\nx : %f\ny : %f\nz : %f\n", x, y, z);
+}
+
+void display()
+{
+    for (int i = 0; i < 3; i++)
+        printf("\nEquation %d : %dx + %dy + %dz = %d", i + 1,
+                   a[i][0], a[i][1], a[i][2], c[i]);
+    printf("\n");
+}
+
+int main()
+{
+    for (int i = 0; i < 3; i++)
+    {
+        printf("Enter the %d Equation 's Coefficient  : ", i + 1);
+        scanf("%d %d %d %d", &a[i][0], &a[i][1], &a[i][2], &c[i]);
+    }
+    display();
+    GaussElimination();
+    // display();
+
+    return 0;
+} 
+          </pre
+                >
+              </div>
+              <div class="output">
+                <h3>Output :</h3>
+                <pre>
+Enter the 1 Equation 's Coefficient  : 3 4 5 40
+Enter the 2 Equation 's Coefficient  : 2 -3 4 13
+Enter the 3 Equation 's Coefficient  : 1 1 1 9
+
+Equation 1 : 3x + 4y + 5z = 40
+Equation 2 : 2x + -3y + 4z = 13
+Equation 3 : 1x + 1y + 1z = 9
+
+Solution
+x : 1.000000
+y : 3.000000
+z : 5.000000
+                                          </pre
+                >
+              </div>
+            </div>
+          </div>
+
+          <div id="GJord" class="Content-box">
+            <h2>Gauss Jordan Method</h2>
+            <div class="code-box">
+              <div class="code">
+                <h3>Code :</h3>
+                <pre>
+#include &lt;stdio.h>
+#include &lt;conio.h>
+
+int a[3][3], c[3];
+
+void GaussJordan()
+{
+    float x, y, z;
+    for (int i = 0; i < 2; i++)
+    {
+        for (int j = i + 1; j < 3; j++)
+        {
+            int fact1 = a[i][i], fact2 = a[j][i];
+            for (int k = 0; k < 3; k++)
+                a[j][k] = fact1 * a[j][k] - fact2 * a[i][k];
+            c[j] = fact1 * c[j] - fact2 * c[i];
+        }
+    }
+
+    for (int i = 2; i > 0; i--)
+    {
+        for (int j = i - 1; j >= 0; j--)
+        {
+            int fact1 = a[i][i], fact2 = a[j][i];
+            for (int k = 0; k < 3; k++)
+                a[j][k] = fact1 * a[j][k] - fact2 * a[i][k];
+            c[j] = fact1 * c[j] - fact2 * c[i];
+        }
+    }
+
+    z = (float)c[2] / a[2][2];
+    y = (float)c[1] / a[1][1];
+    x = (float)c[0] / a[0][0];
+
+    printf("\nSolution\nx : %f\ny : %f\nz : %f\n", x, y, z);
+}
+
+void display()
+{
+    for (int i = 0; i < 3; i++)
+        printf("\nEquation %d : %dx + %dy + %dz = %d", i + 1, 
+                a[i][0], a[i][1], a[i][2], c[i]);
+    printf("\n");
+}
+
+int main()
+{
+    for (int i = 0; i < 3; i++)
+    {
+        printf("Enter the %d Equation 's Coefficient  : ", i + 1);
+        scanf("%d %d %d %d", &a[i][0], &a[i][1], &a[i][2], &c[i]);
+    }
+    display();
+    GaussJordan();
+    // display();
+
+    return 0;
+}
+          </pre
+                >
+              </div>
+              <div class="output">
+                <h3>Output :</h3>
+                <pre>
+Enter the 1 Equation 's Coefficient  : 1 2 1 8
+Enter the 2 Equation 's Coefficient  : 2 3 4 20
+Enter the 3 Equation 's Coefficient  : 4 3 2 16
+
+Equation 1 : 1x + 2y + 1z = 8
+Equation 2 : 2x + 3y + 4z = 20
+Equation 3 : 4x + 3y + 2z = 16
+
+Solution
+x : 1.000000
+y : 2.000000
+z : 3.000000
+                                          </pre
+                >
+              </div>
+            </div>
+          </div>
+
+
+          <div id="GJaco" class="Content-box">
+            <h2>Gauss Jacobi Method</h2>
+            <div class="code-box">
+              <div class="code">
+                <h3>Code :</h3>
+                <pre>
+#include &lt;stdio.h>
+
+int a[3][3], c[3];
+
+void display()
+{
+    for (int i = 0; i < 3; i++)
+        printf("Equation %d : %dx + %dy + %dz = %d\n", i + 1, 
+                a[i][0], a[i][1], a[i][2], c[i]);
+}
+
+void GaussJacobi()
+{
+    int i = 1;
+    float x, y, z, px, py, pz;
+    x = y = z = 0;
+    do
+    {
+        px = x;
+        py = y;
+        pz = z;
+        x = (float)(c[0] - (a[0][1] * py) - (a[0][2] * pz)) / a[0][0];
+        y = (float)(c[1] - (a[1][0] * px) - (a[1][2] * pz)) / a[1][1];
+        z = (float)(c[2] - (a[2][0] * px) - (a[2][1] * py)) / a[2][2];
+        printf("\nIteration %d : \nx : %f\ny : %f\nz : %f\n", i++, x, y, z);
+    } while (px != x && py != y && pz != z);
+    printf("\nSolution\nx : %f\ny : %f\nz : %f\n", x, y, z);
+}
+
+int main()
+{
+    for (int i = 0; i < 3; i++)
+    {
+        printf("Enter the %d Equation 's Coefficient : ", i + 1);
+        scanf("%d %d %d %d", &a[i][0], &a[i][1], &a[i][2], &c[i]);
+    }
+    display();
+    GaussJacobi();
+    return 0;
+}
+          </pre
+                >
+              </div>
+              <div class="output">
+                <h3>Output :</h3>
+                <pre>
+Enter the 1 Equation 's Coefficient : 5 -1 1 10
+Enter the 2 Equation 's Coefficient : 2 4 0 12
+Enter the 3 Equation 's Coefficient : 1 1 5 -1
+Equation 1 : 5x + -1y + 1z = 10
+Equation 2 : 2x + 4y + 0z = 12
+Equation 3 : 1x + 1y + 5z = -1
+
+Iteration 1 :
+x : 2.000000
+y : 3.000000
+z : -0.200000
+
+Iteration 2 :
+x : 2.640000
+y : 2.000000
+z : -1.200000
+
+Iteration 3 :
+x : 2.640000
+y : 1.680000
+z : -1.128000
+
+Solution
+x : 2.640000
+y : 1.680000
+z : -1.128000
+                                          </pre
+                >
+              </div>
+            </div>
+          </div>
+
+
+          <div id="GSeid" class="Content-box">
+            <h2>Gauss-Siedal Method</h2>
+            <div class="code-box">
+              <div class="code">
+                <h3>Code :</h3>
+                <pre>
+#include &lt;stdio.h>
+
+int a[3][3], c[3];
+
+void display()
+{
+    for (int i = 0; i < 3; i++)
+        printf("Equation %d : %dx + %dy + %dz = %d\n", i + 1,
+                 a[i][0], a[i][1], a[i][2], c[i]);
+}
+
+void GaussSiedal()
+{
+    int i = 1;
+    float x, y, z, px, py, pz;
+    x = y = z = 0;
+    do
+    {
+        px = x;
+        py = y;
+        pz = z;
+        x = (float)(c[0] - (a[0][1] * y) - (a[0][2] * z)) / a[0][0];
+        y = (float)(c[1] - (a[1][0] * x) - (a[1][2] * z)) / a[1][1];
+        z = (float)(c[2] - (a[2][0] * x) - (a[2][1] * y)) / a[2][2];
+        printf("\nIteration %d : \nx : %f\ny : %f\nz : %f\n", i++, x, y, z);
+    } while (px != x && py != y && pz != z);
+    printf("\nSolution\nx : %f\ny : %f\nz : %f\n", x, y, z);
+}
+
+int main()
+{
+    for (int i = 0; i < 3; i++)
+    {
+        printf("Enter the %d Equation 's Coefficient : ", i + 1);
+        scanf("%d %d %d %d", &a[i][0], &a[i][1], &a[i][2], &c[i]);
+    }
+    display();
+    GaussSiedal();
+    return 0;
+}
+          </pre
+                >
+              </div>
+              <div class="output">
+                <h3>Output :</h3>
+                <pre>
+Enter the 1 Equation 's Coefficient : 27 6 -1 85
+Enter the 2 Equation 's Coefficient : 6 15 2 72
+Enter the 3 Equation 's Coefficient : 1 1 54 110
+Equation 1 : 27x + 6y + -1z = 85
+Equation 2 : 6x + 15y + 2z = 72
+Equation 3 : 1x + 1y + 54z = 110
+
+Iteration 1 :
+x : 3.148148
+y : 3.540741
+z : 1.913169
+
+Iteration 2 :
+x : 2.432175
+y : 3.572041
+z : 1.925848
+
+Iteration 3 :
+x : 2.425689
+y : 3.572945
+z : 1.925951
+
+Iteration 4 :
+x : 2.425492
+y : 3.573010
+z : 1.925954
+
+Iteration 5 :
+x : 2.425478
+y : 3.573015
+z : 1.925954
+
+Iteration 6 :
+x : 2.425476
+y : 3.573016
+z : 1.925954
+
+Solution
+x : 2.425476
+y : 3.573016
+z : 1.925954
+                                          </pre
+                >
+              </div>
+            </div>
+          </div>
+
+
+          <div id="LagI" class="Content-box">
+            <h2>Lagrange Interpolation</h2>
+            <div class="code-box">
+              <div class="code">
+                <h3>Code :</h3>
+                <pre>
+#include &lt;stdio.h>
+#include &lt;conio.h>
+
+int n=3;
+float x[10],fx[10];
+
+float Interpolation (float gx)
+{
+    float gfx=0.0;
+    for(int i=0; i < n; i++)
+    {
+        int j;
+        float tynum=1.0, tyden=1.0;
+        for(j=0; j < n; j++)
+        {
+            if(i!=j)
+            {
+                tynum*= (gx - x[j]);
+                tyden*= (x[i]-x[j]);
+                //printf("\npgx : %f and xj : %f",gx,x[j]);
+                //printf("\nxi : %f and xj : %f",x[i],x[j]);
+            }
+        }
+        //printf("\ntynum : %f , tyden : %f",tynum,tyden);
+        gfx+=((tynum/tyden)*fx[i]);
+    }
+    return gfx;
+}
+
+int main()
+{
+    printf ("Enter the number of terms : ");
+    scanf("%d",&n);
+    for(int i=0; i < n; i++)
+    {
+        printf("Enter the %d term: ",i+1);
+        scanf("%f %f",&x[i],&fx[i]);
+    }
+
+    float gx=0.0;
+    printf("Enter the value of x : ");
+    scanf("%f",&gx);
+
+    printf("Tx at %f is %f\n", gx, Interpolation(gx));
+    return 0;
+}
+ 
+          </pre>
+              </div>
+              <div class="output">
+                <h3>Output :</h3>
+                <pre>
+Enter the number of terms : 5
+Enter the 1 term: 5 150
+Enter the 2 term: 7 392
+Enter the 3 term: 11 1452
+Enter the 4 term: 13 2366
+Enter the 5 term: 17 5202
+Enter the value of x : 9
+Tx at 9.000000 is 809.999939  
+                                          </pre
+                >
+              </div>
+            </div>
+          </div>
+
+
+          <div id="InvI" class="Content-box">
+            <h2>Inverse Interpolation</h2>
+            <div class="code-box">
+              <div class="code">
+                <h3>Code :</h3>
+                <pre>
+#include &lt;stdio.h>
+#include &lt;conio.h>
+
+int n=3;
+float x[10],fx[10];
+
+float InverseInterpolation (float yx)
+{
+    float gx=0.0;
+    for(int i=0; i < ;n; i++)
+    {
+        int j;
+        float tynum=1.0, tyden=1.0;
+        for(j=0; j < n; j++)
+        {
+            if(i!=j)
+            {
+                tynum*= (yx - fx[j]);
+                tyden*= (fx[i]-fx[j]);
+                //printf("\npgx : %f and xj : %f",gx,x[j]);
+                //printf("\nxi : %f and xj : %f",x[i],x[j]);
+            }
+        }
+        //printf("\ntynum : %f , tyden : %f",tynum,tyden);
+        gx+=((tynum/tyden)*x[i]);
+    }
+    return gx;
+}
+
+int main()
+{
+    printf ("Enter the number of terms : ");
+    scanf("%d",&n);
+    for(int i=0; i < n; i++)
+    {
+        printf("Enter the %d term: ",i+1);
+        scanf("%f %f",&x[i],&fx[i]);
+    }
+
+    float yx=0.0;
+    printf("Enter the value of y : ");
+    scanf("%f",&yx);
+
+    printf("x at %f is %f\n", yx, InverseInterpolation(yx));
+    return 0;
+}
+
+          </pre
+                >
+              </div>
+              <div class="output">
+                <h3>Output :</h3>
+                <pre>
+Enter the number of terms : 4
+Enter the 1 term: 20 0.342
+Enter the 2 term: 25 0.423
+Enter the 3 term: 30 0.500
+Enter the 4 term: 35 0.650
+Enter the value of y : 0.390
+x at 0.390000 is 22.840576
+                                          </pre
+                >
+              </div>
+            </div>
+          </div>
+
+
+          <div id="NewDiv" class="Content-box">
+            <h2>Newton's Divided Difference Formula</h2>
+            <div class="code-box">
+              <div class="code">
+                <h3>Code :</h3>
+                <pre>
+  
+          </pre
+                >
+              </div>
+              <div class="output">
+                <h3>Output :</h3>
+                <pre>
+  
+                                          </pre
+                >
+              </div>
+            </div>
+          </div>
+
+
+          <div id="NewFor" class="Content-box">
+            <h2>Newton's Forward Difference Formula</h2>
+            <div class="code-box">
+              <div class="code">
+                <h3>Code :</h3>
+                <pre>
+  
+          </pre
+                >
+              </div>
+              <div class="output">
+                <h3>Output :</h3>
+                <pre>
+  
+                                          </pre
+                >
+              </div>
+            </div>
+          </div>
+          
+          <div id="NewBac" class="Content-box">
+            <h2>Newton's Backward Difference Formula</h2>
+            <div class="code-box">
+              <div class="code">
+                <h3>Code :</h3>
+                <pre>
+  
+          </pre
+                >
+              </div>
+              <div class="output">
+                <h3>Output :</h3>
+                <pre>
+  
+                                          </pre
+                >
+              </div>
+            </div>
+          </div>
+
+
+          <div id="Trap" class="Content-box">
+            <h2>Trapezoidal Rule</h2>
+            <div class="code-box">
+              <div class="code">
+                <h3>Code :</h3>
+                <pre>
+  
+          </pre
+                >
+              </div>
+              <div class="output">
+                <h3>Output :</h3>
+                <pre>
+  
+                                          </pre
+                >
+              </div>
+            </div>
+          </div>
+
+
+          <div id="Simp1/3" class="Content-box">
+            <h2>Simpson's 1/3 Rule</h2>
+            <div class="code-box">
+              <div class="code">
+                <h3>Code :</h3>
+                <pre>
+  
+          </pre
+                >
+              </div>
+              <div class="output">
+                <h3>Output :</h3>
+                <pre>
+  
+                                          </pre
+                >
+              </div>
+            </div>
+          </div>
+
+
+          <div id="Simp3/8" class="Content-box">
+            <h2>Simpson's 3/8 Rule</h2>
+            <div class="code-box">
+              <div class="code">
+                <h3>Code :</h3>
+                <pre>
+  
+          </pre
+                >
+              </div>
+              <div class="output">
+                <h3>Output :</h3>
+                <pre>
+  
+                                          </pre
+                >
+              </div>
+            </div>
+          </div>
+
+
+          <!-- <div id="Trap" class="Content-box">
+            <h2>Trapezoidal Rule</h2>
+            <div class="code-box">
+              <div class="code">
+                <h3>Code :</h3>
+                <pre>
+  
+          </pre
+                >
+              </div>
+              <div class="output">
+                <h3>Output :</h3>
+                <pre>
+  
+                                          </pre
+                >
+              </div>
+            </div>
+          </div> -->
+
+
+        </div>
+
+        <footer id="Contact">
+          <img src="../Images/profile.jpg" />
+          <p>Learn Code</p>
+          <span>Copywrite &copy; 2024 LearnCode.com </span>
+
+          <a
+            href="https://www.facebook.com/"
+            aria-label="facebook"
+            target="_blank"
+            rel="noreferrer"
+            class="links"
+            ><svg
+              fill="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              class="w-5 h-5"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"
+              ></path>
+            </svg>
+          </a>
+
+          <a
+            href="https://www.twitter.com/"
+            aria-label="twitter"
+            target="_blank"
+            rel="noreferrer"
+            class="links"
+          >
+            <svg
+              fill="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              class="w-5 h-5"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"
+              ></path>
+            </svg>
+          </a>
+
+          <a
+            href="https://www.instagram.com/"
+            aria-label="instagram"
+            target="_blank"
+            rel="noreferrer"
+            class="links"
+            ><svg
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              class="w-5 h-5"
+              viewBox="0 0 24 24"
+            >
+              <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+              <path
+                d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"
+              ></path>
+            </svg>
+          </a>
+
+          <a
+            href="https://www.github.com/"
+            aria-label="github"
+            target="_blank"
+            rel="noreferrer"
+            class="links"
+            ><svg
+              stroke="currentColor"
+              fill="currentColor"
+              stroke-width="0"
+              viewBox="0 0 1024 1024"
+              class="text-xl"
+              height="1em"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9a127.5 127.5 0 0 1 38.1 91v112.5c.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"
+              ></path>
+            </svg>
+          </a>
+        </footer>
+      </section>
+    </main>
+  </body>
+</html>
