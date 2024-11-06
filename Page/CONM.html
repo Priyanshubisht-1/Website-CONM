@@ -11,7 +11,7 @@
       <nav class="nav" id="nav">
         <img src="../Images/1000031782-removebg-preview.png" />
         <a href="../index.html">Home</a>
-        <a href="CONM.html">Practise</a>
+        <a href="CONM.html">Practice</a>
         <a href="../index.html#About">About</a>
         <a href="#Contact">Contact</a>
       </nav>
@@ -24,44 +24,48 @@
         <a href="#bintodec">Binary to Decimal</a>
         <a href="#floattobin">Float to Binary</a>
         <a href="#bintofloat">Binary to Float</a>
-        <hr/>
-        
+        <hr />
+
         <span>Solution of Non-Linear Equations</span>
         <a href="#Bisection">Bisection Method</a>
         <a href="#Regular-Falsi">Regular-Falsi Method</a>
         <a href="#Newton-Raphson">Newton Rapson Method</a>
         <a href="#Secant">Secant Method</a>
         <a href="#Birge-Vieta">Birge-Vieta Method</a>
-        <hr/>
-        
+        <hr />
+
         <span>Solution of Linear &nbsp;Equations</span>
         <a href="#GElim">Gauss Elimination</a>
         <a href="#GJord">Gauss jordan Method</a>
         <a href="#GJaco">Gauss Jacobi Method</a>
         <a href="#GSeid">Gauss Seidal Method</a>
-        <hr/>
-        
+        <hr />
+
         <span>Interpolation</span>
         <a href="#LagI">Lagrange Interpolation</a>
         <a href="#InvI">Inverse Interpolation</a>
         <a href="#NewDiv">Newton's Divided Differ</a>
         <a href="#NewFor">Newton's Forward Differ</a>
         <a href="#NewBac">Newton's Backward Diff</a>
-        <hr/>
+        <hr />
 
         <span>Numerical Integration</span>
         <a href="#Trap">Trapezoidal Rule</a>
         <a href="#Simp1/3">Simpson's 1/3 Rule</a>
         <a href="#Simp3/8">Simpson's 3/8 Rule</a>
-        <hr/>
+        <hr />
 
         <span>Numerical Solution of Differential Equations</span>
         <a href="#Rung2">Runge-Kutta 2nd Order</a>
         <a href="#Rung4">Runge-Kutta 4th Order</a>
         <a href="#Eul">Euler's Method</a>
         <a href="#ModEul">Modified Euler's Method</a>
-        <hr/>
+        <hr />
 
+        <span>Approximation of Functions</span>
+        <a href="#taylor">Taylor Series</a>
+        <a href="#chebys">Chebyshev Polynomial</a>
+        <hr />
       </section>
 
       <section class="Content">
@@ -331,7 +335,6 @@ Decimal equivalent: -20
             </div>
           </div>
         </div> -->
-
 
         <!-- <div id="negto1s" class="Content-box">
           <h2>Negative number to 2s Compliment</h2>
@@ -1349,7 +1352,6 @@ z : 3.000000
             </div>
           </div>
 
-
           <div id="GJaco" class="Content-box">
             <h2>Gauss Jacobi Method</h2>
             <div class="code-box">
@@ -1433,7 +1435,6 @@ z : -1.128000
               </div>
             </div>
           </div>
-
 
           <div id="GSeid" class="Content-box">
             <h2>Gauss-Siedal Method</h2>
@@ -1534,7 +1535,6 @@ z : 1.925954
             </div>
           </div>
 
-
           <div id="LagI" class="Content-box">
             <h2>Lagrange Interpolation</h2>
             <div class="code-box">
@@ -1588,7 +1588,8 @@ int main()
     return 0;
 }
  
-          </pre>
+          </pre
+                >
               </div>
               <div class="output">
                 <h3>Output :</h3>
@@ -1606,7 +1607,6 @@ Tx at 9.000000 is 809.999939
               </div>
             </div>
           </div>
-
 
           <div id="InvI" class="Content-box">
             <h2>Inverse Interpolation</h2>
@@ -1680,27 +1680,64 @@ x at 0.390000 is 22.840576
             </div>
           </div>
 
-
           <div id="NewDiv" class="Content-box">
             <h2>Newton's Divided Difference Formula</h2>
             <div class="code-box">
               <div class="code">
                 <h3>Code :</h3>
                 <pre>
-  
-          </pre
-                >
+#include &lt;stdio.h>
+
+int main() {
+    int n, i, j;
+    float x[10], y[10][10], xp, yp = 0, p;
+
+    printf("Enter number of data points: ");
+    scanf("%d", &n);
+
+    printf("Enter All the values of x and y:\n");
+    for(i = 0; i < n; i++) {
+      printf("Enter %d value of x and y : ", i+1);
+      scanf("%f %f", &x[i],&y[i][0]);
+    }
+
+    printf("Enter interpolation point: ");
+    scanf("%f", &xp);
+
+    for(i = 1; i < n; i++) {
+        for(j = 0; j < n - i; j++) {
+            y[j][i] = (y[j+1][i-1] - y[j][i-1]) / (x[j+i] - x[j]);
+        }
+    }
+
+    yp = y[0][0];
+    p = 1;
+
+    for(i = 1; i < n; i++) {
+        p *= (xp - x[i-1]);
+        yp += p * y[0][i];
+    }
+
+    printf("Interpolated value at %.2f is %.2f\n", xp, yp);
+
+    return 0;
+}
+                </pre>
               </div>
               <div class="output">
                 <h3>Output :</h3>
                 <pre>
-  
-                                          </pre
-                >
+Enter All the values of x and y:
+Enter 1 value of x and y : 1 1
+Enter 2 value of x and y : 2 8
+Enter 3 value of x and y : 3 27
+Enter 4 value of x and y : 4 64
+Enter interpolation point: 2.5
+Interpolated value at 2.50 is 15.62
+                </pre>
               </div>
             </div>
           </div>
-
 
           <div id="NewFor" class="Content-box">
             <h2>Newton's Forward Difference Formula</h2>
@@ -1708,40 +1745,127 @@ x at 0.390000 is 22.840576
               <div class="code">
                 <h3>Code :</h3>
                 <pre>
-  
-          </pre
-                >
+#include &lt;stdio.h>
+
+int main() {
+    int n, i, j;
+    float x[10], y[10][10], xp, h, p, yp = 0, factorial;
+
+    printf("Enter number of data points: ");
+    scanf("%d", &n);
+
+    printf("Enter the values of x and y:\n");
+    for(i = 0; i < n; i++) {
+        printf("Enter %d value of x and y : ", i+1);
+        scanf("%f %f", &x[i],&y[i][0]);
+    }
+
+    printf("Enter interpolation point: ");
+    scanf("%f", &xp);
+
+    h = x[1] - x[0];
+
+    for(i = 1; i < n; i++) {
+        for(j = 0; j < n - i; j++) {
+            y[j][i] = y[j+1][i-1] - y[j][i-1];
+        }
+    }
+
+    p = (xp - x[0]) / h;
+    yp = y[0][0];
+    factorial = 1;
+
+    for(i = 1; i < n; i++) {
+        factorial *= i;
+        p = p * (p - (i - 1));
+        yp += (p * y[0][i]) / factorial;
+    }
+
+    printf("Interpolated value at %.2f is %.2f\n", xp, yp);
+
+    return 0;
+}
+                </pre>
               </div>
               <div class="output">
                 <h3>Output :</h3>
                 <pre>
-  
-                                          </pre
-                >
+Enter number of data points: 4
+Enter the values of x and y:
+Enter 1 value of x and y : 1 1
+Enter 2 value of x and y : 2 8
+Enter 3 value of x and y : 3 27
+Enter 4 value of x and y : 4 64
+Enter interpolation point: 2.5
+Interpolated value at 2.50 is 15.62
+                </pre>
               </div>
             </div>
           </div>
-          
+
           <div id="NewBac" class="Content-box">
             <h2>Newton's Backward Difference Formula</h2>
             <div class="code-box">
               <div class="code">
                 <h3>Code :</h3>
                 <pre>
-  
-          </pre
-                >
+#include &lt;stdio.h>
+
+int main() {
+    int n, i, j;
+    float x[10], y[10][10], xp, h, p, yp = 0, factorial;
+
+    printf("Enter number of data points: ");
+    scanf("%d", &n);
+
+    printf("Enter the values of x and y:\n");
+    for(i = 0; i < n; i++) {
+      printf("Enter %d value of x and y : ", i+1);
+      scanf("%f %f", &x[i],&y[i][0]);
+    }
+
+    printf("Enter interpolation point: ");
+    scanf("%f", &xp);
+
+    h = x[1] - x[0];
+
+    for(i = 1; i < n; i++) {
+        for(j = n - 1; j >= i; j--) {
+            y[j][i] = y[j][i-1] - y[j-1][i-1];
+        }
+    }
+
+    p = (xp - x[n-1]) / h;
+    yp = y[n-1][0];
+    factorial = 1;
+
+    for(i = 1; i < n; i++) {
+        factorial *= i;
+        p = p * (p + (i - 1));
+        yp += (p * y[n-1][i]) / factorial;
+    }
+
+    printf("Interpolated value at %.2f is %.2f\n", xp, yp);
+
+    return 0;
+}
+                </pre>
               </div>
               <div class="output">
                 <h3>Output :</h3>
                 <pre>
-  
-                                          </pre
-                >
+Enter number of data points: 4
+Enter the values of x and y:
+Enter 1 value of x and y : 1 1
+Enter 2 value of x and y : 2 8
+Enter 3 value of x and y : 3 27
+Enter 4 value of x and y : 4 64
+Enter interpolation point: 3.5
+Interpolated value at 3.50 is 46.88
+                </pre>
               </div>
             </div>
           </div>
-
 
           <div id="Trap" class="Content-box">
             <h2>Trapezoidal Rule</h2>
@@ -1749,20 +1873,55 @@ x at 0.390000 is 22.840576
               <div class="code">
                 <h3>Code :</h3>
                 <pre>
-  
-          </pre
-                >
+#include &lt;stdio.h>
+#include &lt;math.h>
+
+double f(double x) {
+    return x * x;
+}
+
+double trapezoidal(double a, double b, int n) {
+    double h = (b - a) / n;
+    double sum = f(a) + f(b);
+
+    for (int i = 1; i < n; i++) {
+        sum += 2 * f(a + i * h);
+    }
+
+    return (h / 2) * sum;
+}
+
+int main() {
+    double a, b;
+    int n;
+
+    printf("Enter lower limit (a): ");
+    scanf("%lf", &a);
+    printf("Enter upper limit (b): ");
+    scanf("%lf", &b);
+    printf("Enter number of sub-intervals (n): ");
+    scanf("%d", &n);
+
+    double result = trapezoidal(a, b, n);
+
+    printf("The integral result using the Trapezoidal rule is: %lf\n", result);
+
+    return 0;
+}
+                </pre>
               </div>
               <div class="output">
                 <h3>Output :</h3>
                 <pre>
-  
-                                          </pre
-                >
+Enter lower limit (a): 0
+Enter upper limit (b): 1
+Enter number of sub-intervals (n): 4
+The integral result using the Trapezoidal 
+rule is: 0.333333
+                </pre>
               </div>
             </div>
           </div>
-
 
           <div id="Simp1/3" class="Content-box">
             <h2>Simpson's 1/3 Rule</h2>
@@ -1770,20 +1929,69 @@ x at 0.390000 is 22.840576
               <div class="code">
                 <h3>Code :</h3>
                 <pre>
-  
-          </pre
-                >
+#include &lt;stdio.h>
+#include &lt;math.h>
+
+double f(double x) {
+    return pow(x, 2);
+}
+
+double simpsons_13(double a, double b, int n) {
+    if (n % 2 != 0) {
+        printf("Error: n must be an even number for Simpson's 1/3 rule.\n");
+        return -1;
+    }
+
+    double h = (b - a) / n;
+    double sum = f(a) + f(b);
+
+    for (int i = 1; i < n; i++) {
+        if (i % 2 == 0)
+            sum += 2 * f(a + i * h);
+        else
+            sum += 4 * f(a + i * h);
+    }
+
+    return (h / 3) * sum;
+}
+
+int main() {
+    double a, b;
+    int n;
+
+    printf("Enter lower limit (a): ");
+    scanf("%lf", &a);
+    printf("Enter upper limit (b): ");
+    scanf("%lf", &b);
+    printf("Enter number of sub-intervals (n, must be an even number): ");
+    scanf("%d", &n);
+
+    if (n % 2 != 0) {
+        printf("n must be an even number!\n");
+        return -1;
+    }
+
+    double result = simpsons_13(a, b, n);
+
+    printf("The integral result using Simpson's 1/3 rule is: %lf\n", result);
+
+    return 0;
+}
+                </pre>
               </div>
               <div class="output">
                 <h3>Output :</h3>
                 <pre>
-  
-                                          </pre
-                >
+Enter lower limit (a): 0
+Enter upper limit (b): 1
+Enter number of sub-intervals 
+(n, must be an even number): 4
+The integral result using Simpson's 
+1/3 rule is: 0.333333
+                </pre>
               </div>
             </div>
           </div>
-
 
           <div id="Simp3/8" class="Content-box">
             <h2>Simpson's 3/8 Rule</h2>
@@ -1791,42 +1999,480 @@ x at 0.390000 is 22.840576
               <div class="code">
                 <h3>Code :</h3>
                 <pre>
-  
-          </pre
-                >
+#include &lt;stdio.h>
+#include &lt;math.h>
+
+double f(double x) {
+    return pow(x, 3);
+}
+
+double simpsons_38(double a, double b, int n) {
+    if (n % 3 != 0) {
+        printf("Error: n must be a multiple of 3 for Simpson's 3/8 rule.\n");
+        return -1;
+    }
+
+    double h = (b - a) / n;
+    double sum = f(a) + f(b);
+
+    for (int i = 1; i < n; i++) {
+        if (i % 3 == 0)
+            sum += 2 * f(a + i * h);
+        else
+            sum += 3 * f(a + i * h);
+    }
+
+    return (3 * h / 8) * sum;
+}
+
+int main() {
+    double a, b;
+    int n;
+
+    printf("Enter lower limit (a): ");
+    scanf("%lf", &a);
+    printf("Enter upper limit (b): ");
+    scanf("%lf", &b);
+    printf("Enter number of sub-intervals (n, must be a multiple of 3): ");
+    scanf("%d", &n);
+
+    if (n % 3 != 0) {
+        printf("n must be a multiple of 3!\n");
+        return -1;
+    }
+
+    double result = simpsons_38(a, b, n);
+
+    printf("The integral result using Simpson's 3/8 rule is: %lf\n", result);
+
+    return 0;
+}
+                </pre>
               </div>
               <div class="output">
                 <h3>Output :</h3>
                 <pre>
-  
-                                          </pre
-                >
+Enter lower limit (a): 0
+Enter upper limit (b): 1
+Enter number of sub-intervals 
+(n, must be a multiple of 3): 3
+The integral result using Simpson's 
+3/8 rule is: 0.250000
+                </pre>
               </div>
             </div>
           </div>
 
-
-          <!-- <div id="Trap" class="Content-box">
-            <h2>Trapezoidal Rule</h2>
+          <div id="Rung2" class="Content-box">
+            <h2>Runga-Kutta 2nd Order Method</h2>
             <div class="code-box">
               <div class="code">
                 <h3>Code :</h3>
                 <pre>
-  
-          </pre
-                >
+#include &lt;stdio.h>
+
+double f(double x, double y) {
+    return x + y;
+}
+
+void runge_kutta_2nd(double x0, double y0, double h, int steps) {
+    double x = x0;
+    double y = y0;
+
+    printf("Step\t\tx\t\ty\n");
+    printf("----------------------------------\n");
+    for (int i = 0; i <= steps; i++) {
+        printf("%d\t\t%.4f\t\t%.4f\n", i, x, y);
+        double k1 = h * f(x, y);
+        double k2 = h * f(x + h, y + k1);
+        y = y + 0.5 * (k1 + k2);
+        x = x + h;
+    }
+}
+
+int main() {
+    double x0, y0, h;
+    int steps;
+
+    printf("Enter initial x (x0): ");
+    scanf("%lf", &x0);
+    printf("Enter initial y (y0): ");
+    scanf("%lf", &y0);
+    printf("Enter step size (h): ");
+    scanf("%lf", &h);
+    printf("Enter number of steps: ");
+    scanf("%d", &steps);
+
+    runge_kutta_2nd(x0, y0, h, steps);
+
+    return 0;
+}
+                </pre>
               </div>
               <div class="output">
                 <h3>Output :</h3>
                 <pre>
-  
-                                          </pre
-                >
+Enter initial x (x0): 0
+Enter initial y (y0): 1
+Enter step size (h): 0.1
+Enter number of steps: 10
+
+Step            x               y
+----------------------------------
+0               0.0000          1.0000
+1               0.1000          1.1050
+2               0.2000          1.2210
+3               0.3000          1.3493
+4               0.4000          1.4911
+5               0.5000          1.6476
+6               0.6000          1.8206
+7               0.7000          2.0117
+8               0.8000          2.2225
+9               0.9000          2.4555
+10              1.0000          2.7125
+                </pre>
               </div>
             </div>
-          </div> -->
+          </div>
 
+          <div id="Rung4" class="Content-box">
+            <h2>Runga-Kutta 4th Order Method</h2>
+            <div class="code-box">
+              <div class="code">
+                <h3>Code :</h3>
+                <pre>
+#include &lt;stdio.h>
 
+double f(double x, double y) {
+    return x + y;
+}
+
+void runge_kutta_4th(double x0, double y0, double h, int steps) {
+    double x = x0;
+    double y = y0;
+
+    printf("Step\t\tx\t\ty\n");
+    printf("----------------------------------\n");
+    for (int i = 0; i <= steps; i++) {
+        printf("%d\t\t%.4f\t\t%.4f\n", i, x, y);
+        double k1 = h * f(x, y);
+        double k2 = h * f(x + 0.5 * h, y + 0.5 * k1);
+        double k3 = h * f(x + 0.5 * h, y + 0.5 * k2);
+        double k4 = h * f(x + h, y + k3);
+        y = y + (k1 + 2 * k2 + 2 * k3 + k4) / 6;
+        x = x + h;
+    }
+}
+
+int main() {
+    double x0, y0, h;
+    int steps;
+
+    printf("Enter initial x (x0): ");
+    scanf("%lf", &x0);
+    printf("Enter initial y (y0): ");
+    scanf("%lf", &y0);
+    printf("Enter step size (h): ");
+    scanf("%lf", &h);
+    printf("Enter number of steps: ");
+    scanf("%d", &steps);
+
+    runge_kutta_4th(x0, y0, h, steps);
+
+    return 0;
+}
+                </pre>
+              </div>
+              <div class="output">
+                <h3>Output :</h3>
+                <pre>
+Enter initial x (x0): 0
+Enter initial y (y0): 1
+Enter step size (h): 0.1
+Enter number of steps: 10
+
+Step            x               y
+----------------------------------
+0               0.0000          1.0000
+1               0.1000          1.1103
+2               0.2000          1.2428
+3               0.3000          1.3997
+4               0.4000          1.5836
+5               0.5000          1.7974
+6               0.6000          2.0442
+7               0.7000          2.3276
+8               0.8000          2.6512
+9               0.9000          3.0193
+10              1.0000          3.4365
+                </pre>
+              </div>
+            </div>
+          </div>
+
+          <div id="Eul" class="Content-box">
+            <h2>Euler's Rule</h2>
+            <div class="code-box">
+              <div class="code">
+                <h3>Code :</h3>
+                <pre>
+#include &lt;stdio.h>
+
+double f(double x, double y) {
+    return x + y;
+}
+
+void euler(double x0, double y0, double h, int steps) {
+    double x = x0;
+    double y = y0;
+
+    printf("Step\t\tx\t\ty\n");
+    printf("----------------------------------\n");
+    for (int i = 0; i <= steps; i++) {
+        printf("%d\t\t%.4f\t\t%.4f\n", i, x, y);
+        y = y + h * f(x, y);
+        x = x + h;
+    }
+}
+
+int main() {
+    double x0, y0, h;
+    int steps;
+
+    printf("Enter initial x (x0): ");
+    scanf("%lf", &x0);
+    printf("Enter initial y (y0): ");
+    scanf("%lf", &y0);
+    printf("Enter step size (h): ");
+    scanf("%lf", &h);
+    printf("Enter number of steps: ");
+    scanf("%d", &steps);
+
+    euler(x0, y0, h, steps);
+
+    return 0;
+}
+                </pre>
+              </div>
+              <div class="output">
+                <h3>Output :</h3>
+                <pre>
+Enter initial x (x0): 0
+Enter initial y (y0): 1
+Enter step size (h): 0.1
+Enter number of steps: 10
+
+Step            x               y
+----------------------------------
+0               0.0000          1.0000
+1               0.1000          1.1000
+2               0.2000          1.2200
+3               0.3000          1.3620
+4               0.4000          1.5282
+5               0.5000          1.7210
+6               0.6000          1.9421
+7               0.7000          2.1933
+8               0.8000          2.4766
+9               0.9000          2.7943
+10              1.0000          3.1497
+                </pre>
+              </div>
+            </div>
+          </div>
+
+          <div id="ModEul" class="Content-box">
+            <h2>Modified Euler's Rule</h2>
+            <div class="code-box">
+              <div class="code">
+                <h3>Code :</h3>
+                <pre>
+#include &lt;stdio.h>
+
+double f(double x, double y) {
+    return x + y;
+}
+
+void modified_euler(double x0, double y0, double h, int steps) {
+    double x = x0;
+    double y = y0;
+
+    printf("Step\t\tx\t\ty\n");
+    printf("----------------------------------\n");
+    for (int i = 0; i <= steps; i++) {
+        printf("%d\t\t%.4f\t\t%.4f\n", i, x, y);
+        double k1 = h * f(x, y);
+        double k2 = h * f(x + h, y + k1);
+        y = y + 0.5 * (k1 + k2);
+        x = x + h;
+    }
+}
+
+int main() {
+    double x0, y0, h;
+    int steps;
+
+    printf("Enter initial x (x0): ");
+    scanf("%lf", &x0);
+    printf("Enter initial y (y0): ");
+    scanf("%lf", &y0);
+    printf("Enter step size (h): ");
+    scanf("%lf", &h);
+    printf("Enter number of steps: ");
+    scanf("%d", &steps);
+
+    modified_euler(x0, y0, h, steps);
+
+    return 0;
+}
+                </pre>
+              </div>
+              <div class="output">
+                <h3>Output :</h3>
+                <pre>
+Enter initial x (x0): 0
+Enter initial y (y0): 1
+Enter step size (h): 0.1
+Enter number of steps: 10
+
+Step            x               y
+----------------------------------
+0               0.0000          1.0000
+1               0.1000          1.1050
+2               0.2000          1.2210
+3               0.3000          1.3493
+4               0.4000          1.4910
+5               0.5000          1.6476
+6               0.6000          1.8206
+7               0.7000          2.0116
+8               0.8000          2.2225
+9               0.9000          2.4554
+10              1.0000          2.7125
+                </pre>
+              </div>
+            </div>
+          </div>
+
+          <div id="taylor" class="Content-box">
+            <h2>Taylor Series Representation</h2>
+            <div class="code-box">
+              <div class="code">
+                <h3>Code :</h3>
+                <pre>
+#include &lt;stdio.h>
+#include &lt;math.h>
+
+double taylor_series(double x, double a, int n, double derivatives[])
+{
+    double result = 0.0;
+
+    for (int i = 0; i <= n; i++)
+    {
+        result += derivatives[i] * pow(x - a, i) / (tgamma(i + 1));
+    }
+
+    return result;
+}
+
+int main()
+{
+    int n = 3;
+    double x, a;
+
+    printf("Enter the point of expansion (a): ");
+    scanf("%lf", &a);
+    printf("Enter the number of derivatives (n): ");
+    scanf("%d", &n);
+
+    double derivatives[n + 1];
+    printf("Enter the value of the function f(a): ");
+    scanf("%lf", &derivatives[0]);
+
+    for (int i = 1; i <= n; i++)
+    {
+        printf("Enter the value of the %d-th derivative f^(%d)(a): ", i, i);
+        scanf("%lf", &derivatives[i]);
+    }
+
+    printf("Enter the value of x to approximate f(x): ");
+    scanf("%lf", &x);
+
+    double result = taylor_series(x, a, n, derivatives);
+
+    printf("The approximation of f(%.3lf) using Taylor series at point %.3lf 
+    is: %.6lf\n", x, a, result);
+
+    return 0;
+}
+
+                </pre>
+              </div>
+              <div class="output">
+                <h3>Output :</h3>
+                <pre>
+Enter the point of expansion (a): 1
+Enter the number of derivatives (n): 3
+Enter the value of the function f(a): 2
+Enter the value of the 1-th derivative 
+f^(1)(a): -9
+Enter the value of the 2-th derivative 
+f^(2)(a): -6
+Enter the value of the 3-th derivative 
+f^(3)(a): 6
+Enter the value of x to approximate 
+f(x): 1.05
+The approximation of f(1.050) using Taylor 
+series at point 1.000 is: 1.542625
+                </pre>
+              </div>
+            </div>
+          </div>
+
+          <div id="chebys" class="Content-box">
+            <h2>Chebyshev Polynomial</h2>
+            <div class="code-box">
+              <div class="code">
+                <h3>Code :</h3>
+                <pre>
+#include &lt;stdio.h>
+
+double chebyshev(int n, double x) {
+    if (n == 0) return 1;
+    if (n == 1) return x;
+
+    double T0 = 1, T1 = x, Tn;
+    for (int i = 2; i <= n; i++) {
+        Tn = 2 * x * T1 - T0;
+        T0 = T1;
+        T1 = Tn;
+    }
+    return Tn;
+}
+
+int main() {
+    int n;
+    double x;
+
+    printf("Enter the order of the Chebyshev polynomial (n): ");
+    scanf("%d", &n);
+    printf("Enter the value of x: ");
+    scanf("%lf", &x);
+
+    double result = chebyshev(n, x);
+    printf("The value of T_%d(%.2f) is: %.6f\n", n, x, result);
+
+    return 0;
+}
+                </pre>
+              </div>
+              <div class="output">
+                <h3>Output :</h3>
+                <pre>
+Enter the order of the Chebyshev polynomial (n): 3
+Enter the value of x: 0.5
+The value of T_3(0.50) is: -0.500000
+                </pre>
+              </div>
+            </div>
+          </div>
         </div>
 
         <footer id="Contact">
